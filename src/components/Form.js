@@ -11,18 +11,20 @@ export default function Form(props) {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    // submit();
+    // console.log(disabled);
+    if (!disabled) submit();
   }
 
   const onChange = evt => {
     const {name, value, type, checked} = evt.target;
+    // console.log(evt.target);
     const valueToUse = type === 'checkbox' ? checked : value;
     change(name, valueToUse);
   }
 
 
   return (
-    <form className='form container'>
+    <form className='form container' onSubmit={onSubmit}>
       <div className='form-group submit'>
         <h2>Register</h2>
         <button>submit</button>
@@ -61,10 +63,10 @@ export default function Form(props) {
         </label>
         <label>Terms of Service&nbsp;
           <input
-            value={values.tos}
-            onChange={onChange}
             type='checkbox'
             name='tos'
+            onChange={onChange}
+            checked={values.tos}
           />
         </label>
       </div>
